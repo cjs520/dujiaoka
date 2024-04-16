@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  dujiaoka:
+    image: jiangjuhong/dujiaoka:latest
+    container_name: dujiaoka
+    ports:
+      - "80:80"
+      - "9000:9000"
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      - WEB_DOCUMENT_ROOT=/app/public
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    environment:
+      - MYSQL_ROOT_PASSWORD=Qaz123456789.
+      - MYSQL_DATABASE=dujiaoka
+    volumes:
+      - ./mysql/db:/var/lib/mysql
+  db2:
+    image: mysql:5.7
+    restart: always
+    container_name: db2
+    environment:
+      - MYSQL_ROOT_PASSWORD=Qaz123456789.
+      - MYSQL_DATABASE=epusdt
+      - MYSQL_USER=epusdt
+      - MYSQL_PASSWORD=Qaz123456789.
+    volumes:
+      - ./mysql/db2:/var/lib/mysql
+
+  redis:
+    image: redis:latest
+    restart: always
+    container_name: redis
+    volumes:
+      - ./redis/data:/data
+  
+  epusdt:
+    image: stilleshan/epusdt
+    restart: always
+    volumes:
+      - ./epusdt.conf:/app/.env
+    ports:
+      - 8000:8000
+
+
