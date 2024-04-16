@@ -7,9 +7,6 @@ services:
     ports:
       - "80:80"
       - "9000:9000"
-    depends_on:
-      - mysql
-      - redis
     environment:
       - WEB_DOCUMENT_ROOT=/app/public
 
