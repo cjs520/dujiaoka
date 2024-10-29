@@ -2,7 +2,8 @@ version: '3.8'
 
 services:
   dujiaoka:
-    image: jiangjuhong/dujiaoka:latest
+    # image: jiangjuhong/dujiaoka:latest
+    image: cjs520/dujiao:latest
     container_name: dujiaoka
     ports:
       - "80:80"
